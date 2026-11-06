@@ -10,7 +10,7 @@
   --paper-low:#d2a466;
   --page-edge:#e7cfa0;
   --page-gap:#b9a274;
-  --ink:#2b1d13;
+  --ink:#33241a;
   --ink-soft:#5b4331;
   --red:#a3301e;
   --red-deep:#7e2315;
@@ -55,6 +55,10 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 #story{display:flex;flex-direction:column;gap:16px;filter:url(#worn-text)}
 .page-label,.brand-sub,.choice,.chosen-banner,.quotation,.timestamp,.interpretation{filter:url(#worn-text)}
 .the-end,.advice-heading>span:not(.rule){filter:url(#worn-ink)}
+.ornament,.choice-rule,.lesson .cup,.book-header .cup,.footer,.advice-text{filter:url(#worn-text)}
+/* Ink sits in the paper: partly transparent and multiplied, so the paper's
+   colour and blotches show through everything printed on the page. */
+.book-header,h1,.ornament,#story,#choices,.footer,.screen-nav{opacity:.82;mix-blend-mode:multiply}
 .story-paragraph{margin:0;font-size:20px;line-height:1.32;font-weight:600;text-shadow:0 0 .7px rgba(43,29,19,.6)}
 
 /* ---------- Choices on decision pages ---------- */
