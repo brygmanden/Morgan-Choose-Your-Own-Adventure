@@ -1,0 +1,159 @@
+{
+  "1": {
+    "paras": [
+      "You have just been appointed manager of a neighbourhood café. The previous manager has left you a set of keys, a staffing roster and the passwords to three social media accounts.",
+      "Instagram has a modest following of local customers. Facebook has not been updated for six months, although people still ask questions there. TikTok has one video with more than 100,000 views, mostly from overseas.",
+      "You have little time to spare and must decide where to begin."
+    ],
+    "choices": [
+      [
+        "investigate Instagram, where the café already has local followers",
+        12
+      ],
+      [
+        "investigate TikTok and its unexpectedly large audience",
+        27
+      ],
+      [
+        "look at the neglected Facebook page",
+        41
+      ]
+    ]
+  },
+  "12": {
+    "paras": [
+      "The Instagram account has been quiet for several weeks, but regular customers are still tagging the café in their photographs. The staff recognise many of the people who comment.",
+      "You would like to make better use of this existing audience. The trouble is that nobody currently has responsibility for the account, and your staff are already busy."
+    ],
+    "choices": [
+      [
+        "ask a barista to manage the account",
+        52
+      ],
+      [
+        "bring in a freelance photographer to help",
+        63
+      ],
+      [
+        "agree on a modest posting schedule that the team can maintain",
+        74
+      ]
+    ]
+  },
+  "27": {
+    "paras": [
+      "The TikTok video has been viewed more than 100,000 times. Looking through the comments, you find enthusiastic viewers from all over the world, but very few from your own town.",
+      "The attention is encouraging, although you have no evidence that it has brought customers into the café. You must decide whether a larger online audience is worth pursuing."
+    ],
+    "choices": [
+      [
+        "try to repeat the success with another viral video",
+        85
+      ],
+      [
+        "produce videos aimed more directly at local customers",
+        96
+      ],
+      [
+        "put TikTok aside and try a neighbourhood marketing event",
+        107
+      ]
+    ]
+  },
+  "41": {
+    "paras": [
+      "The Facebook page has hardly been touched in months, yet people continue to use it. Some ask about public holiday hours; others want to know whether the café will be holding another tasting.",
+      "The page may still have a useful role to play. But you cannot commit unlimited staff time to keeping it active."
+    ],
+    "choices": [
+      [
+        "revive the page with regular community updates",
+        118
+      ],
+      [
+        "keep the page primarily for practical information",
+        129
+      ],
+      [
+        "concentrate on partnerships with nearby businesses",
+        140
+      ]
+    ]
+  },
+  "52": {
+    "paras": [
+      "You give the account to a barista who knows the customers well. At first, the arrangement works nicely. The posts are lively, and regulars enjoy seeing familiar faces.",
+      "After a fortnight, however, the barista tells you that preparing content during busy shifts is becoming difficult. You will need to make time for the work if you want them to continue."
+    ],
+    "quote": "I think maintaining a strong and personal brand voice as a cafe for as long as possible is almost always the best strategy.",
+    "time": "05:18–05:28",
+    "lesson": "Morgan's advice supports keeping the café's voice in-house, while giving staff proper time and support."
+  },
+  "63": {
+    "paras": [
+      "You hire a local photographer, who produces a collection of excellent images. The account looks more professional than ever.",
+      "But the photographs show little of the everyday activity or the people who make the café special. You begin to wonder whether the team should take a larger part in deciding what gets published."
+    ],
+    "quote": "I think maintaining a strong and personal brand voice as a cafe for as long as possible is almost always the best strategy.",
+    "time": "05:18–05:28",
+    "lesson": "Professional support can be valuable without handing over control of the café's relationship with customers."
+  },
+  "74": {
+    "paras": [
+      "You ask the team to post twice a week, using photographs taken during service. The schedule is modest, but it is manageable. Customers see the café as it really is, rather than a collection of carefully staged photographs."
+    ],
+    "quote": "It's very obvious when things are getting stale and reused, and frankly, you want to keep things fresh and alive.",
+    "time": "06:21–06:27",
+    "lesson": "A realistic schedule gives you a better chance of keeping the content fresh."
+  },
+  "85": {
+    "paras": [
+      "You make another video, and it attracts 40,000 views. The follower count rises again. The team is pleased, but at the end of the month you cannot identify a corresponding increase in café visits."
+    ],
+    "quote": "And so if you're looking for people to come into your door, there isn't a lot of utility or ROI to that.",
+    "time": "03:18–03:25",
+    "lesson": "Morgan encourages managers to consider whether an audience can contribute to the café's actual objectives."
+  },
+  "96": {
+    "paras": [
+      "Your next videos feature the local market, a new pastry and some of the regular customers. They attract fewer views than the original video.",
+      "Then a customer mentions that they visited after seeing one of the posts. It is only a small result, but you can see how the content might reach people who are able to visit."
+    ],
+    "quote": "The other thing to really look at when you're handed a pile of social media is where your current customer base is most active and what they are responding well to.",
+    "time": "02:03–02:15",
+    "lesson": "Morgan recommends paying attention to existing customers and their behaviour, rather than assuming a large audience is always better."
+  },
+  "107": {
+    "paras": [
+      "You arrange a weekend tasting with the bakery next door. Several unfamiliar faces visit the café, and a few return the following week."
+    ],
+    "quote": "If you don't find a need for social media, I don't think you should add it on just for the sake of it.",
+    "time": "07:15–07:22",
+    "lesson": "Morgan sees social media as one marketing channel among several, rather than something every café must use."
+  },
+  "118": {
+    "paras": [
+      "You begin posting about events and activities in the neighbourhood. Locals share some of the announcements, and the page becomes active again.",
+      "It takes time to maintain, however, so you will need to decide who is responsible and whether the effort is worthwhile."
+    ],
+    "quote": "The other thing to really look at when you're handed a pile of social media is where your current customer base is most active and what they are responding well to.",
+    "time": "02:03–02:15",
+    "lesson": "Morgan recommends finding out where customers are already active before abandoning older accounts."
+  },
+  "129": {
+    "paras": [
+      "You update the café's hours, menu and event details, and arrange for someone to answer questions. The account attracts little attention, but it serves a useful purpose."
+    ],
+    "quote": "I think the number one thing to decide is what your goal is out of all of it.",
+    "time": "01:19–01:29",
+    "lesson": "A simple information service can be a legitimate reason to maintain an account."
+  },
+  "140": {
+    "paras": [
+      "You work with neighbouring businesses to arrange a small community event. It attracts new customers and gives you a reason to keep those local relationships going."
+    ],
+    "quote": "But truly when it comes to businesses, it's just a marketing channel.",
+    "time": "06:55–07:03",
+    "lesson": "Other marketing activities may suit a particular café better."
+  }
+}

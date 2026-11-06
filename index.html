@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f7f4" />
+  <meta name="description" content="An interactive café-management story based on an interview with Morgan Eckroth." />
+  <title>The Café Manager | Barista Hustle</title>
+  <link rel="stylesheet" href="./src/styles.css" />
+  <script type="module" src="./src/main.js"></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="book" id="book" aria-label="The Café Manager interactive adventure">
+      <header class="book-header"><span class="brand">BARISTA HUSTLE<small>THE CAFÉ MANAGER</small></span><span class="page-label">PAGE <span id="pageNumber">1</span></span></header><h1 id="chapterTitle"></h1><div class="chapter-ornament" aria-hidden="true"><span>◆</span></div>
+      <section id="story" aria-live="polite" aria-atomic="true"></section>
+      <section id="choices" class="choices" aria-label="Your choices"></section>
+      <footer class="footer"><button id="back" type="button">Previous page</button><button id="journey" type="button">Your journey</button><button id="reset" type="button">Start again</button></footer>
+      <div id="turnSheets" class="turn-sheets" aria-hidden="true"></div>
+      <div id="turnLabel" class="turn-label" aria-hidden="true"></div>
+      <dialog id="historyDialog" aria-labelledby="historyHeading">
+        <h2 id="historyHeading">Your journey</h2>
+        <div id="historyItems"></div>
+        <button id="closeHistory" type="button" class="close-history">Close</button>
+      </dialog>
+    </div>
+    <p class="outside-caption">A Barista Hustle interactive lesson · Interview with Morgan Eckroth</p>
+  </main>
+</body>
+</html>
