@@ -11,50 +11,9 @@
   <script type="module" src="./src/main.js"></script>
 </head>
 <body>
-  <!-- Print effects: chipped page edges, worn letterpress ink, a dry brush stroke and the café cup icon. -->
+  <!-- Print effects: worn letterpress ink, a dry brush stroke and the café cup icon. -->
   <svg class="svg-defs" aria-hidden="true" focusable="false">
     <defs>
-      <!-- Old page edges: mostly straight, a slow wobble, and small chips bitten out of the edge. -->
-      <filter id="edge-top" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency=".009" numOctaves="2" seed="7" result="w" />
-        <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" result="wob" />
-        <feMorphology in="wob" operator="erode" radius="8" result="core" />
-        <feComposite in="wob" in2="core" operator="out" result="band" />
-        <feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="3" seed="3" result="c" />
-        <feColorMatrix in="c" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  9 0 0 0 -5.6" result="peaks" />
-        <feComposite in="peaks" in2="band" operator="in" result="bites" />
-        <feComposite in="wob" in2="bites" operator="out" />
-      </filter>
-      <filter id="edge-a" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency=".009" numOctaves="2" seed="19" result="w" />
-        <feDisplacementMap in="SourceGraphic" in2="w" scale="5" xChannelSelector="R" yChannelSelector="G" result="wob" />
-        <feMorphology in="wob" operator="erode" radius="6" result="core" />
-        <feComposite in="wob" in2="core" operator="out" result="band" />
-        <feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="3" seed="5" result="c" />
-        <feColorMatrix in="c" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  9 0 0 0 -5.5" result="peaks" />
-        <feComposite in="peaks" in2="band" operator="in" result="bites" />
-        <feComposite in="wob" in2="bites" operator="out" />
-      </filter>
-      <filter id="edge-b" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency=".009" numOctaves="2" seed="31" result="w" />
-        <feDisplacementMap in="SourceGraphic" in2="w" scale="5" xChannelSelector="R" yChannelSelector="G" result="wob" />
-        <feMorphology in="wob" operator="erode" radius="7" result="core" />
-        <feComposite in="wob" in2="core" operator="out" result="band" />
-        <feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="3" seed="8" result="c" />
-        <feColorMatrix in="c" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  9 0 0 0 -5.7" result="peaks" />
-        <feComposite in="peaks" in2="band" operator="in" result="bites" />
-        <feComposite in="wob" in2="bites" operator="out" />
-      </filter>
-      <filter id="edge-c" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency=".009" numOctaves="2" seed="44" result="w" />
-        <feDisplacementMap in="SourceGraphic" in2="w" scale="6" xChannelSelector="R" yChannelSelector="G" result="wob" />
-        <feMorphology in="wob" operator="erode" radius="6" result="core" />
-        <feComposite in="wob" in2="core" operator="out" result="band" />
-        <feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="3" seed="12" result="c" />
-        <feColorMatrix in="c" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  9 0 0 0 -5.4" result="peaks" />
-        <feComposite in="peaks" in2="band" operator="in" result="bites" />
-        <feComposite in="wob" in2="bites" operator="out" />
-      </filter>
       <!-- Rough banner edges and a dry brush stroke. -->
       <filter id="rough" x="-4%" y="-12%" width="108%" height="124%">
         <feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="3" seed="2" result="t" />
@@ -103,12 +62,7 @@
 
   <main class="site-shell">
     <div class="book" id="book" aria-label="The Café Manager interactive adventure">
-      <div class="leaf leaf-4" aria-hidden="true"></div>
-      <div class="leaf leaf-3" aria-hidden="true"></div>
-      <div class="leaf leaf-2" aria-hidden="true"></div>
-      <div class="leaf leaf-1" aria-hidden="true"></div>
       <div class="paper" aria-hidden="true"></div>
-      <div class="dog-ear" aria-hidden="true"></div>
       <header class="book-header">
         <svg class="cup" aria-hidden="true" focusable="false"><use href="#cup" /></svg>
         <div class="brand">

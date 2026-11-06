@@ -1,4 +1,4 @@
-/* Old printed gamebook paperback: a yellowed top page on loose stacked leaves with hand-worn edges, worn brown-black
+/* Old printed gamebook paperback: a photographed old book page, worn brown-black
    letterpress body text and red second-colour ink for titles, rules and banners. */
 @font-face{font-family:"Bitter";src:url("../public/fonts/bitter-roman.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:"Bitter";src:url("../public/fonts/bitter-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
@@ -16,9 +16,7 @@
   --red-deep:#7e2315;
   --cream:#f8e9c8;
   --serif:"Bitter","Rockwell","Roboto Slab",Georgia,serif;
-  --grain:url("../public/textures/paper-grain.svg");
-  --fibres:url("../public/textures/paper-fibres.svg");
-  --stains:url("../public/textures/paper-stains.svg");
+  --paper-photo:url("../public/assets/old-paper.webp");
   color-scheme:light;
 }
 
@@ -30,44 +28,17 @@ body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--serif);-
 .site-shell{padding-block:28px 30px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* ---------- The page ----------
-   .leaf elements are the loose sheets underneath, each nudged, tilted and worn
-   differently so the stack looks handled. .paper is the top page itself:
-   pulp grain, age mottling, uneven soiling along the edges, and the
-   shadow where the page curves into the spine on the left. */
-.book{position:relative;isolation:isolate;width:100%;max-width:540px;min-height:800px;margin:0 auto 10px;padding:30px 34px 18px 40px;display:flex;flex-direction:column;perspective:1400px}
-.leaf{position:absolute;inset:0;border-radius:3px 5px 6px 3px;
-  background:linear-gradient(90deg,rgba(140,88,30,.3),transparent 6%,transparent 92%,rgba(140,88,30,.35)),var(--page-edge);
-  box-shadow:inset 0 0 0 1px rgba(112,70,25,.55),inset 0 0 12px rgba(150,96,36,.45)}
-.leaf-1{z-index:-2;transform:translate(3px,3px) rotate(.45deg);background-color:#e6cd9c;filter:url(#edge-a)}
-.leaf-2{z-index:-3;transform:translate(6px,7px) rotate(-.3deg);background-color:#dfc391;filter:url(#edge-b)}
-.leaf-3{z-index:-4;transform:translate(-2px,9px) rotate(-.7deg);background-color:#d9bb86;filter:url(#edge-c)}
-.leaf-4{z-index:-5;transform:translate(9px,12px) rotate(.6deg);background-color:#d0b07a;border-radius:6px 4px 12px 5px;filter:url(#edge-a) drop-shadow(0 10px 18px rgba(38,24,8,.32))}
-.paper{position:absolute;inset:0;z-index:-1;border-radius:3px 5px 7px 3px;filter:url(#edge-top) drop-shadow(1px 2px 2px rgba(60,40,15,.28));
-  clip-path:polygon(-40px -40px,calc(100% - 66px) -40px,calc(100% + 40px) 66px,calc(100% + 40px) calc(100% + 40px),-40px calc(100% + 40px));
-  background:
-    linear-gradient(90deg,rgba(112,78,30,.30) 0,rgba(112,78,30,.13) 2.2%,rgba(112,78,30,.04) 6%,transparent 11%),
-    linear-gradient(270deg,rgba(150,108,40,.14) 0,transparent 3.5%),
-    linear-gradient(0deg,rgba(150,108,40,.12) 0,transparent 3%),
-    linear-gradient(180deg,rgba(150,108,40,.10) 0,transparent 2.5%),
-    radial-gradient(ellipse 18% 3% at 64% 100%,rgba(150,104,38,.3),transparent 70%),
-    radial-gradient(ellipse 3% 16% at 100% 28%,rgba(150,104,38,.32),transparent 70%),
-    radial-gradient(ellipse 3% 10% at 100% 71%,rgba(150,104,38,.24),transparent 70%),
-    radial-gradient(ellipse 14% 3% at 22% 0%,rgba(150,104,38,.26),transparent 70%),
-    radial-gradient(ellipse 7% 5% at 100% 100%,rgba(140,96,34,.38),transparent 70%),
-    radial-gradient(ellipse 6% 4% at 100% 0%,rgba(140,96,34,.3),transparent 70%),
-    radial-gradient(circle at 93% 96%,transparent 36px,rgba(140,92,34,.16) 38px,rgba(140,92,34,.05) 43px,transparent 46px),
-    radial-gradient(ellipse 22% 13% at 82% 38%,rgba(196,150,72,.12),transparent 70%),
-    var(--stains),
-    var(--grain),
-    var(--fibres),
-    radial-gradient(ellipse 85% 80% at 54% 45%,var(--paper-hi) 0%,var(--paper) 62%,var(--paper-low) 100%);
-  background-size:auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,100% 100%,320px 320px,640px 640px,auto;
-  box-shadow:inset 0 0 0 .5px rgba(120,74,26,.4),inset 0 0 7px rgba(140,82,24,.45),inset 0 0 46px rgba(170,104,36,.32)}
-/* Top corner folded over: the flap shows the back of the leaf. */
-.dog-ear{position:absolute;top:0;right:0;z-index:-1;width:26px;height:26px;background:linear-gradient(to bottom left,transparent 50%,#f4e3bd 50%,#e3c690 82%,#d4ad72 100%);filter:drop-shadow(-1.5px 2px 1.5px rgba(70,40,12,.35))}
+   .paper is a photograph of a real old book page (transparent background).
+   It is drawn as a nine-slice border image: the corners, including the folded
+   top-right corner, keep their natural shape, and only the plain paper in the
+   middle and along the edges stretches to fit the page. */
+.book{position:relative;isolation:isolate;width:100%;max-width:540px;min-height:800px;margin:0 auto 10px;padding:34px 36px 26px 38px;display:flex;flex-direction:column;perspective:1400px}
+.paper{position:absolute;inset:0;z-index:-1;border-style:solid;border-color:transparent;
+  border-image-source:var(--paper-photo);border-image-slice:230 230 120 120 fill;border-image-width:184px 184px 96px 96px;border-image-repeat:stretch;
+  filter:drop-shadow(0 12px 22px rgba(38,24,8,.3)) drop-shadow(0 2px 3px rgba(38,24,8,.22))}
 
 /* ---------- Running head ---------- */
-.book-header{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;gap:8px;margin-bottom:10px}
+.book-header{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;gap:8px;margin-bottom:10px;margin-right:30px}
 .cup{display:block;width:50px;height:46px;color:var(--ink)}
 .brand{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;text-align:center}
 .brand-name{font-weight:800;font-size:clamp(20px,5.4vw,28px);line-height:1;letter-spacing:.02em;text-transform:uppercase;filter:url(#worn-ink)}
@@ -129,7 +100,7 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 
 /* ---------- Page riffle ---------- */
 .turn-sheets{position:absolute;inset:0;z-index:10;pointer-events:none;perspective:1400px}
-.sheet{position:absolute;inset:0;border-radius:2px 4px 5px 2px;background:var(--grain),linear-gradient(90deg,#d9bf88 0%,var(--paper-hi) 9%,var(--paper) 88%,#e2c993 100%);background-size:320px 320px,auto;box-shadow:3px 0 10px rgba(40,24,10,.22);transform-origin:left center;opacity:0;backface-visibility:hidden}
+.sheet{position:absolute;inset:0;border-radius:2px 4px 5px 2px;background:var(--paper-photo) center/100% 100% no-repeat;filter:drop-shadow(3px 0 6px rgba(40,24,10,.22));transform-origin:left center;opacity:0;backface-visibility:hidden}
 .sheet.backwards{transform-origin:right center}
 .sheet.flipping{animation:fastFlip .39s ease-in var(--delay) both}
 .sheet.backwards.flipping{animation-name:reverseFlip}
@@ -140,7 +111,7 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 @keyframes turnLabel{0%,10%{opacity:0}25%,75%{opacity:1}100%{opacity:0}}
 
 /* ---------- Journey dialog ---------- */
-dialog{width:min(390px,calc(100% - 32px));max-height:80vh;padding:24px;border:1.7px solid var(--red);border-radius:6px;background:var(--grain),var(--paper-hi);background-size:320px 320px,auto;color:var(--ink);font-family:var(--serif);box-shadow:0 14px 30px rgba(30,18,8,.35)}
+dialog{width:min(390px,calc(100% - 32px));max-height:80vh;padding:24px;border:1.7px solid var(--red);border-radius:6px;background:var(--paper-hi);color:var(--ink);font-family:var(--serif);box-shadow:0 14px 30px rgba(30,18,8,.35)}
 dialog::backdrop{background:rgba(30,18,8,.45)}
 dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26px var(--serif);text-transform:uppercase}
 .history-link{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,48,30,.45);padding:14px 0;text-align:left;font:600 17px var(--serif);color:var(--ink);cursor:pointer}
@@ -152,16 +123,15 @@ dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26p
   html,body{height:100%;overflow:hidden}
   .site-shell{height:100%;padding-block:6px}
   .site-shell{padding-right:max(24px,env(safe-area-inset-right,0px))}
-  .book{height:calc(100% - 10px);min-height:0;margin-bottom:0;padding:16px 16px 6px 22px}
-  .book-header{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;margin-bottom:6px}
+  .book{height:calc(100% - 10px);min-height:0;margin-bottom:0;padding:20px 18px 10px 20px}
+  .book-header{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;margin-bottom:6px;margin-right:34px}
   .cup{width:42px;height:39px}
   .brand-name{font-size:21px}
   .brand-sub{font-size:10px;gap:6px}
-  .page-label{font-size:11px;margin-top:4px;margin-right:8px}
-  .dog-ear{width:18px;height:18px}
-  .paper{clip-path:polygon(-40px -40px,calc(100% - 58px) -40px,calc(100% + 40px) 58px,calc(100% + 40px) calc(100% + 40px),-40px calc(100% + 40px))}
+  .page-label{font-size:11px;margin-top:4px}
+  .paper{border-image-width:126px 126px 66px 66px}
   h1{font-size:29px}
-  .ornament{margin-bottom:12px}
+  .ornament{margin-bottom:12px;margin-right:22px}
   .ornament svg{width:54px;height:19px}
   #story{gap:12px}
   .story-paragraph{font-size:18px;line-height:1.3}
