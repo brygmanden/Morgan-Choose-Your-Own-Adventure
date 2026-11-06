@@ -70,6 +70,7 @@ function showPage() {
     lesson.innerHTML = '<svg class="cup" aria-hidden="true" focusable="false"><use href="#cup"></use></svg>';
     lesson.append(element('p', 'interpretation', page.lesson));
     choicesEl.append(lesson);
+    choicesEl.append(element('p', 'the-end', 'The End'));
     const backPage = route.at(-2);
     const button = element('button', 'return-choice', `Turn to page ${backPage} to choose again`); button.type='button';
     button.addEventListener('click', () => navigate(route.slice(0,-1)));

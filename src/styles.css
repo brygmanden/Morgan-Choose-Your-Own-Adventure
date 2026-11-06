@@ -1,21 +1,23 @@
-/* Old printed paperback: one aged, yellowed page with ragged edges, brown-black
+/* Old printed gamebook paperback: a yellowed top page on a block of stacked pages, brown-black
    letterpress body text and red second-colour ink for titles, rules and banners. */
 @font-face{font-family:"Bitter";src:url("../public/fonts/bitter-roman.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:"Bitter";src:url("../public/fonts/bitter-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
 
 :root{
-  --desk:#cbc4b8;
-  --paper:#edd8ab;
-  --paper-hi:#f6e8c4;
-  --paper-low:#cfa66a;
+  --desk:#c2bbaf;
+  --paper:#f5e8c6;
+  --paper-hi:#fbf3dc;
+  --paper-low:#e7cf98;
+  --page-edge:#f0e2bd;
+  --page-gap:#b9a274;
   --ink:#2b1d13;
   --ink-soft:#5b4331;
   --red:#a3301e;
   --red-deep:#7e2315;
   --cream:#f8e9c8;
   --serif:"Bitter","Rockwell","Roboto Slab",Georgia,serif;
-  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .26 0 0 0 0 .09 0 0 0 .7 -.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --mottle:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008' numOctaves='4' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .36 0 0 0 0 .12 1.3 0 0 0 -.62'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  --grain:url("../public/textures/paper-grain.svg");
+  --fibres:url("../public/textures/paper-fibres.svg");
   color-scheme:light;
 }
 
@@ -26,19 +28,33 @@ body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--serif);-
 
 .site-shell{padding-block:28px 30px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-/* ---------- The page ---------- */
-.book{position:relative;isolation:isolate;width:100%;max-width:540px;min-height:800px;margin:0 auto;padding:28px 30px 18px;display:flex;flex-direction:column;perspective:1400px}
-.paper{position:absolute;inset:0;z-index:-1;border-radius:14px 9px 16px 8px;
+/* ---------- The page ----------
+   .stack is the paperback's page block: thin page edges fanning out to the right
+   and bottom, with dark gaps between leaves. .paper is the top page itself:
+   pulp grain, fibres, age mottling, edges yellowed from the outside in, and the
+   shadow where the page curves into the spine on the left. */
+.book{position:relative;isolation:isolate;width:100%;max-width:540px;min-height:800px;margin:0 auto 10px;padding:30px 34px 18px 40px;display:flex;flex-direction:column;perspective:1400px}
+.stack{position:absolute;inset:0;z-index:-2;border-radius:2px 4px 5px 2px;background:var(--page-edge);filter:url(#ragged);
+  box-shadow:
+    1px 1.4px 0 0 var(--page-edge), 1.7px 2.2px 0 0 var(--page-gap),
+    2.6px 3.3px 0 0 #efe0b9, 3.2px 4.1px 0 0 #b39b6b,
+    4.1px 5.2px 0 0 #ecdcb4, 4.7px 6px 0 0 #ad9464,
+    5.6px 7.1px 0 0 #e9d8ae, 6.2px 7.9px 0 0 #a78d5c,
+    7.1px 9px 0 0 #e5d3a8, 7.8px 9.9px 0 0 #9c8253,
+    10px 16px 26px rgba(38,24,8,.32), 2px 3px 6px rgba(38,24,8,.2)}
+.paper{position:absolute;inset:0;z-index:-1;border-radius:2px 4px 5px 2px;filter:url(#ragged);
   background:
-    radial-gradient(circle at 4% 97%,transparent 40px,rgba(122,70,22,.22) 42px,rgba(122,70,22,.08) 47px,transparent 50px),
-    radial-gradient(ellipse 32% 18% at 80% 52%,rgba(150,94,36,.14),transparent 70%),
-    radial-gradient(ellipse 26% 22% at 12% 78%,rgba(150,94,36,.13),transparent 70%),
-    radial-gradient(ellipse 30% 16% at 34% 26%,rgba(255,247,224,.4),transparent 70%),
-    var(--noise),
-    var(--mottle),
-    radial-gradient(ellipse 78% 72% at 50% 44%,var(--paper-hi) 0%,var(--paper) 58%,var(--paper-low) 100%);
-  box-shadow:inset 0 0 0 1px rgba(110,66,22,.28),inset 0 0 30px rgba(118,70,20,.42),inset 0 0 5px rgba(88,48,10,.55);
-  filter:url(#ragged) drop-shadow(0 10px 20px rgba(40,24,10,.3))}
+    linear-gradient(90deg,rgba(112,78,30,.30) 0,rgba(112,78,30,.13) 2.2%,rgba(112,78,30,.04) 6%,transparent 11%),
+    linear-gradient(270deg,rgba(150,108,40,.14) 0,transparent 3.5%),
+    linear-gradient(0deg,rgba(150,108,40,.12) 0,transparent 3%),
+    linear-gradient(180deg,rgba(150,108,40,.10) 0,transparent 2.5%),
+    radial-gradient(circle at 93% 96%,transparent 36px,rgba(140,92,34,.16) 38px,rgba(140,92,34,.05) 43px,transparent 46px),
+    radial-gradient(ellipse 22% 13% at 82% 38%,rgba(196,150,72,.12),transparent 70%),
+    var(--grain),
+    var(--fibres),
+    radial-gradient(ellipse 85% 80% at 54% 45%,var(--paper-hi) 0%,var(--paper) 62%,var(--paper-low) 100%);
+  background-size:auto,auto,auto,auto,auto,auto,320px 320px,640px 640px,auto;
+  box-shadow:inset 0 0 0 .5px rgba(130,92,40,.35),inset 0 0 22px rgba(176,128,52,.28)}
 
 /* ---------- Running head ---------- */
 .book-header{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;gap:8px;margin-bottom:10px}
@@ -88,6 +104,10 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 .return-choice::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);filter:url(#brush)}
 .return-choice:hover::before{background:var(--red-deep)}
 
+/* The classic gamebook sign-off on every ending. */
+.the-end{margin:2px 0 18px;text-align:center;font:italic 900 26px/1 var(--serif);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);filter:url(#worn-ink)}
+.the-end::before,.the-end::after{content:"";display:inline-block;width:26px;height:5px;margin:0 12px;vertical-align:.3em;border-top:1.5px solid var(--red);border-bottom:1.5px solid var(--red)}
+
 /* ---------- Footer controls ---------- */
 .footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:6px;border-top:1px solid rgba(163,48,30,.35)}
 .footer button{background:none;border:0;padding:8px 0;min-height:36px;font:italic 500 14px var(--serif);color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
@@ -97,7 +117,7 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 
 /* ---------- Page riffle ---------- */
 .turn-sheets{position:absolute;inset:0;z-index:10;pointer-events:none;perspective:1400px}
-.sheet{position:absolute;inset:0;border-radius:12px 8px 14px 8px;background:var(--noise),linear-gradient(90deg,#c39a60 0%,var(--paper-hi) 9%,var(--paper) 86%,#c8a068 100%);box-shadow:3px 0 10px rgba(40,24,10,.22);transform-origin:left center;opacity:0;backface-visibility:hidden}
+.sheet{position:absolute;inset:0;border-radius:2px 4px 5px 2px;background:var(--grain),linear-gradient(90deg,#d9bf88 0%,var(--paper-hi) 9%,var(--paper) 88%,#e2c993 100%);background-size:320px 320px,auto;box-shadow:3px 0 10px rgba(40,24,10,.22);transform-origin:left center;opacity:0;backface-visibility:hidden}
 .sheet.backwards{transform-origin:right center}
 .sheet.flipping{animation:fastFlip .39s ease-in var(--delay) both}
 .sheet.backwards.flipping{animation-name:reverseFlip}
@@ -108,7 +128,7 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 @keyframes turnLabel{0%,10%{opacity:0}25%,75%{opacity:1}100%{opacity:0}}
 
 /* ---------- Journey dialog ---------- */
-dialog{width:min(390px,calc(100% - 32px));max-height:80vh;padding:24px;border:1.7px solid var(--red);border-radius:6px;background:var(--noise),var(--paper-hi);color:var(--ink);font-family:var(--serif);box-shadow:0 14px 30px rgba(30,18,8,.35)}
+dialog{width:min(390px,calc(100% - 32px));max-height:80vh;padding:24px;border:1.7px solid var(--red);border-radius:6px;background:var(--grain),var(--paper-hi);background-size:320px 320px,auto;color:var(--ink);font-family:var(--serif);box-shadow:0 14px 30px rgba(30,18,8,.35)}
 dialog::backdrop{background:rgba(30,18,8,.45)}
 dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26px var(--serif);text-transform:uppercase}
 .history-link{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,48,30,.45);padding:14px 0;text-align:left;font:600 17px var(--serif);color:var(--ink);cursor:pointer}
@@ -119,7 +139,8 @@ dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26p
 @media (max-width:600px){
   html,body{height:100%;overflow:hidden}
   .site-shell{height:100%;padding-block:6px}
-  .book{height:100%;min-height:0;padding:16px 18px 6px}
+  .site-shell{padding-right:max(24px,env(safe-area-inset-right,0px))}
+  .book{height:calc(100% - 10px);min-height:0;margin-bottom:0;padding:16px 16px 6px 22px}
   .book-header{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;margin-bottom:6px}
   .cup{width:42px;height:39px}
   .brand-name{font-size:21px}
@@ -143,6 +164,7 @@ dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26p
   .lesson .cup{width:40px;height:37px}
   .interpretation{font-size:16px;padding-left:10px}
   .return-choice{font-size:17px;padding:11px 14px}
+  .the-end{font-size:22px;margin-bottom:14px}
   .footer{margin-top:6px;padding-top:2px}
   .footer button{font-size:12px;min-height:34px}
   .outside-caption{display:none}

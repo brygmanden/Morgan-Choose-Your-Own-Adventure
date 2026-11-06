@@ -11,12 +11,12 @@
   <script type="module" src="./src/main.js"></script>
 </head>
 <body>
-  <!-- Print effects: ragged paper edges, worn letterpress ink, a dry brush stroke and the café cup icon. -->
+  <!-- Print effects: slightly uneven page edges, worn letterpress ink, a dry brush stroke and the café cup icon. -->
   <svg class="svg-defs" aria-hidden="true" focusable="false">
     <defs>
       <filter id="ragged" x="-3%" y="-3%" width="106%" height="106%">
-        <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="4" seed="7" result="t" />
-        <feDisplacementMap in="SourceGraphic" in2="t" scale="7" xChannelSelector="R" yChannelSelector="G" />
+        <feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="3" seed="7" result="t" />
+        <feDisplacementMap in="SourceGraphic" in2="t" scale="2.2" xChannelSelector="R" yChannelSelector="G" />
       </filter>
       <filter id="rough" x="-4%" y="-12%" width="108%" height="124%">
         <feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="3" seed="2" result="t" />
@@ -31,7 +31,7 @@
       </filter>
       <filter id="worn-ink" x="-3%" y="-6%" width="106%" height="112%">
         <feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="2" seed="4" result="n" />
-        <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -9 0 0 0 6.9" result="m" />
+        <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -10 0 0 0 8" result="m" />
         <feComposite in="SourceGraphic" in2="m" operator="in" />
       </filter>
       <symbol id="cup" viewBox="0 0 50 46">
@@ -49,6 +49,7 @@
 
   <main class="site-shell">
     <div class="book" id="book" aria-label="The Café Manager interactive adventure">
+      <div class="stack" aria-hidden="true"></div>
       <div class="paper" aria-hidden="true"></div>
       <header class="book-header">
         <svg class="cup" aria-hidden="true" focusable="false"><use href="#cup" /></svg>
