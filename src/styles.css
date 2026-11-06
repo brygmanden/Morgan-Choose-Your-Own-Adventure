@@ -1,4 +1,4 @@
-/* Old printed gamebook paperback: a yellowed top page on a block of stacked pages, brown-black
+/* Old printed gamebook paperback: a yellowed top page on loose stacked leaves with hand-worn edges, worn brown-black
    letterpress body text and red second-colour ink for titles, rules and banners. */
 @font-face{font-family:"Bitter";src:url("../public/fonts/bitter-roman.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:"Bitter";src:url("../public/fonts/bitter-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
@@ -29,32 +29,37 @@ body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--serif);-
 .site-shell{padding-block:28px 30px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* ---------- The page ----------
-   .stack is the paperback's page block: thin page edges fanning out to the right
-   and bottom, with dark gaps between leaves. .paper is the top page itself:
-   pulp grain, fibres, age mottling, edges yellowed from the outside in, and the
+   .leaf elements are the loose sheets underneath, each nudged, tilted and worn
+   differently so the stack looks handled. .paper is the top page itself:
+   pulp grain, age mottling, uneven soiling along the edges, and the
    shadow where the page curves into the spine on the left. */
 .book{position:relative;isolation:isolate;width:100%;max-width:540px;min-height:800px;margin:0 auto 10px;padding:30px 34px 18px 40px;display:flex;flex-direction:column;perspective:1400px}
-.stack{position:absolute;inset:0;z-index:-2;border-radius:2px 4px 5px 2px;background:var(--page-edge);filter:url(#ragged);
-  box-shadow:
-    1px 1.4px 0 0 var(--page-edge), 1.7px 2.2px 0 0 var(--page-gap),
-    2.6px 3.3px 0 0 #efe0b9, 3.2px 4.1px 0 0 #b39b6b,
-    4.1px 5.2px 0 0 #ecdcb4, 4.7px 6px 0 0 #ad9464,
-    5.6px 7.1px 0 0 #e9d8ae, 6.2px 7.9px 0 0 #a78d5c,
-    7.1px 9px 0 0 #e5d3a8, 7.8px 9.9px 0 0 #9c8253,
-    10px 16px 26px rgba(38,24,8,.32), 2px 3px 6px rgba(38,24,8,.2)}
-.paper{position:absolute;inset:0;z-index:-1;border-radius:2px 4px 5px 2px;filter:url(#ragged);
+.leaf{position:absolute;inset:0;border-radius:4px 10px 7px 3px;
+  background:linear-gradient(90deg,rgba(150,110,48,.25),transparent 6%,transparent 92%,rgba(150,110,48,.3)),var(--page-edge);
+  box-shadow:inset 0 0 0 1px rgba(122,88,40,.5),inset 0 0 10px rgba(160,118,52,.35)}
+.leaf-1{z-index:-2;transform:translate(3px,3px) rotate(.45deg);background-color:#f2e4c0;filter:url(#edge-a)}
+.leaf-2{z-index:-3;transform:translate(6px,7px) rotate(-.3deg);background-color:#ecdcb3;filter:url(#edge-b)}
+.leaf-3{z-index:-4;transform:translate(-2px,9px) rotate(-.7deg);background-color:#e9d7ab;filter:url(#edge-c)}
+.leaf-4{z-index:-5;transform:translate(9px,12px) rotate(.6deg);background-color:#e3cf9f;border-radius:6px 4px 12px 5px;filter:url(#edge-a) drop-shadow(0 10px 18px rgba(38,24,8,.32))}
+.paper{position:absolute;inset:0;z-index:-1;border-radius:3px 9px 14px 4px;filter:url(#edge-top) drop-shadow(1px 2px 2px rgba(60,40,15,.25));
   background:
     linear-gradient(90deg,rgba(112,78,30,.30) 0,rgba(112,78,30,.13) 2.2%,rgba(112,78,30,.04) 6%,transparent 11%),
     linear-gradient(270deg,rgba(150,108,40,.14) 0,transparent 3.5%),
     linear-gradient(0deg,rgba(150,108,40,.12) 0,transparent 3%),
     linear-gradient(180deg,rgba(150,108,40,.10) 0,transparent 2.5%),
+    radial-gradient(ellipse 18% 3% at 64% 100%,rgba(150,104,38,.3),transparent 70%),
+    radial-gradient(ellipse 3% 16% at 100% 28%,rgba(150,104,38,.32),transparent 70%),
+    radial-gradient(ellipse 3% 10% at 100% 71%,rgba(150,104,38,.24),transparent 70%),
+    radial-gradient(ellipse 14% 3% at 22% 0%,rgba(150,104,38,.26),transparent 70%),
+    radial-gradient(ellipse 7% 5% at 100% 100%,rgba(140,96,34,.38),transparent 70%),
+    radial-gradient(ellipse 6% 4% at 100% 0%,rgba(140,96,34,.3),transparent 70%),
     radial-gradient(circle at 93% 96%,transparent 36px,rgba(140,92,34,.16) 38px,rgba(140,92,34,.05) 43px,transparent 46px),
     radial-gradient(ellipse 22% 13% at 82% 38%,rgba(196,150,72,.12),transparent 70%),
     var(--grain),
     var(--fibres),
     radial-gradient(ellipse 85% 80% at 54% 45%,var(--paper-hi) 0%,var(--paper) 62%,var(--paper-low) 100%);
-  background-size:auto,auto,auto,auto,auto,auto,320px 320px,640px 640px,auto;
-  box-shadow:inset 0 0 0 .5px rgba(130,92,40,.35),inset 0 0 22px rgba(176,128,52,.28)}
+  background-size:auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,320px 320px,640px 640px,auto;
+  box-shadow:inset 0 0 0 .5px rgba(130,92,40,.3),inset 0 0 14px rgba(176,128,52,.2)}
 
 /* ---------- Running head ---------- */
 .book-header{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;gap:8px;margin-bottom:10px}
@@ -71,7 +76,9 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 .ornament svg{flex:none;width:64px;height:22px}
 
 /* ---------- Body text ---------- */
-#story{display:flex;flex-direction:column;gap:16px}
+#story{display:flex;flex-direction:column;gap:16px;filter:url(#worn-text)}
+.page-label,.brand-sub,.choice,.chosen-banner,.quotation,.timestamp,.interpretation{filter:url(#worn-text)}
+.the-end,.advice-heading>span:not(.rule){filter:url(#worn-ink)}
 .story-paragraph{margin:0;font-size:20px;line-height:1.32;font-weight:600;text-shadow:0 0 .7px rgba(43,29,19,.6)}
 
 /* ---------- Choices on decision pages ---------- */
@@ -83,11 +90,11 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 
 /* ---------- Ending pages ---------- */
 #story + .choices:has(.advice){margin-top:0}
-.chosen-banner{position:relative;isolation:isolate;margin:4px 6px 22px;padding:9px 14px;text-align:center;font:italic 800 19px/1.25 var(--serif);color:var(--red);filter:url(#worn-ink)}
+.chosen-banner{position:relative;isolation:isolate;margin:4px 6px 22px;padding:9px 14px;text-align:center;font:italic 800 19px/1.25 var(--serif);color:var(--red)}
 .chosen-banner::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(251,239,212,.6);border:1.7px solid var(--red);border-radius:3px;filter:url(#rough)}
 
 .advice{position:relative;margin:0 6px 18px;padding:0 14px 14px;border:1.7px solid var(--red);border-radius:5px;background:rgba(251,239,212,.3)}
-.advice-heading{position:relative;isolation:isolate;margin:-7px -22px 14px;padding:8px 12px;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--cream);font:italic 900 clamp(22px,6vw,30px)/1.05 var(--serif);text-transform:uppercase;filter:url(#worn-ink)}
+.advice-heading{position:relative;isolation:isolate;margin:-7px -22px 14px;padding:8px 12px;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--cream);font:italic 900 clamp(22px,6vw,30px)/1.05 var(--serif);text-transform:uppercase}
 .advice-heading::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);filter:url(#rough)}
 .advice-heading .rule{flex:none;width:34px;height:6px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor}
 .advice-body{display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);gap:14px;align-items:start}
@@ -105,7 +112,7 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 .return-choice:hover::before{background:var(--red-deep)}
 
 /* The classic gamebook sign-off on every ending. */
-.the-end{margin:2px 0 18px;text-align:center;font:italic 900 26px/1 var(--serif);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);filter:url(#worn-ink)}
+.the-end{margin:2px 0 18px;text-align:center;font:italic 900 26px/1 var(--serif);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 .the-end::before,.the-end::after{content:"";display:inline-block;width:26px;height:5px;margin:0 12px;vertical-align:.3em;border-top:1.5px solid var(--red);border-bottom:1.5px solid var(--red)}
 
 /* ---------- Footer controls ---------- */

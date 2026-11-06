@@ -30,9 +30,9 @@ Push this project to a repository. In GitHub **Settings → Pages**, choose **De
 - `src/main.js`: book UI, navigation, bookmark dialog, fast page-turning transition.
 - `src/story.js`: route validation and navigation helpers.
 - `src/story-data.json`: editable passages, branching page numbers, ending quotes and interpretations.
-- `src/styles.css`: aged gamebook paperback look (yellowed top page on a stacked page block, paper grain and fibres, spine shading, worn red second-colour ink), mobile styles, reduced-motion support.
+- `src/styles.css`: aged gamebook paperback look (yellowed top page on loose stacked leaves with hand-worn edges, paper grain, spine shading, worn, faded print), mobile styles, reduced-motion support.
 - `index.html` also holds the SVG print-effect filters (ragged paper, worn ink, dry brush) and the coffee-cup icon.
-- `public/textures/`: SVG paper grain, fibres and age mottling used on the page.
+- `public/textures/`: SVG paper grain, specks and age mottling used on the page.
 - `public/fonts/`: self-hosted Bitter typeface (SIL Open Font License), so no remote fonts are needed.
 - `public/assets/morgan-graphic-novel-avatar.png`: portrait displayed at each ending.
 - `reference/Episode 5 Getting Started.vtt`: original interview subtitles, for editorial verification.
