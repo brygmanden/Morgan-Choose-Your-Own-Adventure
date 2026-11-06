@@ -46,7 +46,7 @@ body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--serif);-
 .brand-sub::before,.brand-sub::after{content:"";flex:1;border-top:1.6px solid var(--red)}
 .page-label{justify-self:end;align-self:start;margin-top:8px;font-style:italic;font-weight:700;font-size:13px;letter-spacing:.06em;white-space:nowrap}
 
-h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,46px);line-height:1;letter-spacing:-.005em;text-align:center;text-transform:uppercase;text-wrap:balance;filter:url(#worn-ink)}
+h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,46px);line-height:1;letter-spacing:-.005em;text-align:center;text-transform:uppercase;text-wrap:balance;filter:url(#worn-title)}
 .ornament{display:flex;align-items:center;gap:6px;color:var(--red);margin-bottom:18px}
 .ornament::before,.ornament::after{content:"";flex:1;height:5px;border-top:2px solid currentColor;border-bottom:1px solid currentColor}
 .ornament svg{flex:none;width:64px;height:22px}
