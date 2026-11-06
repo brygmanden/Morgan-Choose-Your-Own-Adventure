@@ -30,7 +30,9 @@ Push this project to a repository. In GitHub **Settings → Pages**, choose **De
 - `src/main.js`: book UI, navigation, bookmark dialog, fast page-turning transition.
 - `src/story.js`: route validation and navigation helpers.
 - `src/story-data.json`: editable passages, branching page numbers, ending quotes and interpretations.
-- `src/styles.css`: black-and-white paperback layout, readable serif type, mobile styles, reduced-motion support.
+- `src/styles.css`: aged printed-page look (yellowed paper, ragged edges, worn red second-colour ink), mobile styles, reduced-motion support.
+- `index.html` also holds the SVG print-effect filters (ragged paper, worn ink, dry brush) and the coffee-cup icon.
+- `public/fonts/`: self-hosted Bitter typeface (SIL Open Font License), so no remote fonts are needed.
 - `public/assets/morgan-graphic-novel-avatar.png`: portrait displayed at each ending.
 - `reference/Episode 5 Getting Started.vtt`: original interview subtitles, for editorial verification.
 - `reference/1980s-paperback-layout-reference.png`: user-supplied visual inspiration.

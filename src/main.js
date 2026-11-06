@@ -50,23 +50,28 @@ function showPage() {
     }
     const advice = element('section', 'advice');
     advice.setAttribute('aria-label', 'Advice from Morgan Eckroth');
+    const heading = element('h2', 'advice-heading');
+    heading.append(element('span', 'rule'), element('span', '', 'Morgan’s advice'), element('span', 'rule'));
+    advice.append(heading);
     const avatar = element('img', 'avatar');
     avatar.src = './public/assets/morgan-graphic-novel-avatar.png';
     avatar.alt = 'Graphic-novel illustration of Morgan Eckroth';
     avatar.width = 310; avatar.height = 325;
-    advice.append(element('h2', 'advice-heading', 'Morgan’s advice'));
     const portrait = element('div', 'portrait-frame');
     portrait.append(avatar);
-    advice.append(portrait);
-    
-    advice.append(element('blockquote', 'quotation', `“${page.quote}”`));
-    advice.append(element('p', 'timestamp', `Interview · ${page.time}`));
+    const adviceText = element('div', 'advice-text');
+    adviceText.append(element('blockquote', 'quotation', `“${page.quote}”`));
+    adviceText.append(element('p', 'timestamp', `Interview timestamp ${page.time}`));
+    const adviceBody = element('div', 'advice-body');
+    adviceBody.append(portrait, adviceText);
+    advice.append(adviceBody);
     choicesEl.append(advice);
-    choicesEl.append(element('p', 'interpretation', page.lesson));
+    const lesson = element('div', 'lesson');
+    lesson.innerHTML = '<svg class="cup" aria-hidden="true" focusable="false"><use href="#cup"></use></svg>';
+    lesson.append(element('p', 'interpretation', page.lesson));
+    choicesEl.append(lesson);
     const backPage = route.at(-2);
-    const button = element('button', 'choice return-choice'); button.type='button';
-    button.append(document.createTextNode('If you would like to choose again, '));
-    button.append(element('strong','',`turn back to page ${backPage}.`));
+    const button = element('button', 'return-choice', `Turn to page ${backPage} to choose again`); button.type='button';
     button.addEventListener('click', () => navigate(route.slice(0,-1)));
     choicesEl.append(button);
   }
