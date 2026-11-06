@@ -62,16 +62,15 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 .story-paragraph{margin:0;font-size:20px;line-height:1.32;font-weight:600;text-shadow:0 0 .7px rgba(43,29,19,.6)}
 
 /* ---------- Choices on decision pages ---------- */
-/* The choices area takes all spare height, so the footer is always at the foot of the page.
-   Decision pages stack their choices at the bottom of that area; endings start at the top. */
-.choices{flex:1 0 auto;padding-top:22px;display:flex;flex-direction:column;justify-content:flex-end}
+/* The choices sit right under the body text; the area below them takes all spare
+   height, so the footer is always at the foot of the page. */
+.choices{flex:1 0 auto;padding-top:22px;display:flex;flex-direction:column;justify-content:flex-start}
 .choice-rule{height:5px;border-top:2px solid var(--red);border-bottom:1px solid var(--red);margin-bottom:4px}
 .choice{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,48,30,.45);padding:13px 6px;text-align:center;font:italic 600 19px/1.35 var(--serif);color:var(--red);cursor:pointer;text-shadow:0 0 .6px rgba(163,48,30,.5)}
 .choice strong{font-weight:800}
 .choice:hover{background:rgba(163,48,30,.07)}
 
 /* ---------- Ending pages ---------- */
-#choices:has(.advice){justify-content:flex-start}
 .chosen-banner{position:relative;isolation:isolate;margin:4px 6px 22px;padding:9px 14px;text-align:center;font:italic 800 19px/1.25 var(--serif);color:var(--red)}
 .chosen-banner::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(251,239,212,.6);border:1.7px solid var(--red);border-radius:3px;filter:url(#rough)}
 
