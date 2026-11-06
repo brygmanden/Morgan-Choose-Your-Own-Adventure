@@ -30,7 +30,7 @@ Push this project to a repository. In GitHub **Settings → Pages**, choose **De
 - `src/main.js`: book UI, navigation, bookmark dialog, fast page-turning transition.
 - `src/story.js`: route validation and navigation helpers.
 - `src/story-data.json`: editable passages, branching page numbers, ending quotes and interpretations.
-- `src/styles.css`: old gamebook paperback look (the photographed page as paper, spine shading, worn, faded print), mobile styles, reduced-motion support.
+- `src/styles.css`: old gamebook paperback look (the photographed page as paper, worn, faded print), mobile styles, reduced-motion support.
 - `index.html` also holds the SVG print-effect filters (ragged paper, worn ink, dry brush) and the coffee-cup icon.
 - `public/assets/old-paper.webp`: photograph of a real old book page (transparent background), drawn as a nine-slice border image so its corners keep their shape at any page size.
 - `public/fonts/`: self-hosted Bitter typeface (SIL Open Font License), so no remote fonts are needed.
