@@ -59,6 +59,7 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 /* Ink sits in the paper: partly transparent and multiplied, so the paper's
    colour and blotches show through everything printed on the page. */
 .book-header,h1,.ornament,#story,#choices,.footer,.screen-nav{opacity:.82;mix-blend-mode:multiply}
+h1{opacity:.68}
 .story-paragraph{margin:0;font-size:20px;line-height:1.32;font-weight:600;text-shadow:0 0 .7px rgba(43,29,19,.6)}
 
 /* ---------- Choices on decision pages ---------- */
