@@ -58,7 +58,7 @@ h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,
 .ornament,.choice-rule,.lesson .cup,.book-header .cup,.footer,.advice-text{filter:url(#worn-text)}
 /* Ink sits in the paper: partly transparent and multiplied, so the paper's
    colour and blotches show through everything printed on the page. */
-.book-header,h1,.ornament,#story,#choices,.footer,.screen-nav{opacity:.82;mix-blend-mode:multiply}
+.book-header,h1,.ornament,#story,#choices,.footer{opacity:.82;mix-blend-mode:multiply}
 h1{opacity:.68}
 .story-paragraph{margin:0;font-size:20px;line-height:1.32;font-weight:600;text-shadow:0 0 .7px rgba(43,29,19,.6)}
 
@@ -103,7 +103,7 @@ h1{opacity:.68}
 .footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:6px;border-top:1px solid rgba(163,48,30,.35)}
 .footer button{background:none;border:0;padding:8px 0;min-height:36px;font:italic 500 14px var(--serif);color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .footer button:disabled{opacity:.35;cursor:default}
-.choice:focus-visible,.return-choice:focus-visible,.footer button:focus-visible,.history-link:focus-visible,.close-history:focus-visible,.screen-nav button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.choice:focus-visible,.return-choice:focus-visible,.footer button:focus-visible,.history-link:focus-visible,.close-history:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 /* ---------- Page riffle ---------- */
 .turn-sheets{position:absolute;inset:0;z-index:10;pointer-events:none;perspective:1400px}
@@ -124,46 +124,38 @@ dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26p
 .history-link{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,48,30,.45);padding:14px 0;text-align:left;font:600 17px var(--serif);color:var(--ink);cursor:pointer}
 .close-history{margin-top:18px;padding:9px 18px;background:none;border:1.5px solid var(--red);border-radius:3px;color:var(--red);font:italic 700 15px var(--serif);cursor:pointer}
 
-/* ---------- Phones: each screen is one printed page ---------- */
-.screen-nav{display:none}
+/* ---------- Phones: one page per passage, at least a screen tall, growing to fit ---------- */
 @media (max-width:600px){
-  html,body{height:100%;overflow:hidden}
-  .site-shell{height:100%;padding-block:6px}
+  .site-shell{padding-block:6px}
   .site-shell{padding-right:max(24px,env(safe-area-inset-right,0px))}
-  .book{height:calc(100% - 10px);min-height:0;margin-bottom:0;padding:20px 18px 10px 20px}
+  .book{min-height:calc(100svh - 12px);margin-bottom:0;padding:20px 18px 12px 20px}
   .book-header{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;margin-bottom:6px;margin-right:34px}
   .cup{width:42px;height:39px}
-  .brand-name{font-size:21px}
+  .brand-name{font-size:20px}
   .brand-sub{font-size:10px;gap:6px}
   .page-label{font-size:11px;margin-top:4px}
   .paper{border-image-width:126px 126px 66px 66px}
-  h1{font-size:29px}
+  h1{font-size:27px}
   .ornament{margin-bottom:12px;margin-right:22px}
   .ornament svg{width:54px;height:19px}
   #story{gap:12px}
-  .story-paragraph{font-size:18px;line-height:1.3}
+  .story-paragraph{font-size:16.5px;line-height:1.32}
   .choices{padding-top:14px}
-  .choice{font-size:17px;padding:10px 4px}
-  .chosen-banner{font-size:17px;margin:0 4px 16px;padding:7px 10px}
+  .choice{font-size:16px;padding:10px 4px}
+  .chosen-banner{font-size:16px;margin:0 4px 16px;padding:7px 10px}
   .advice{margin:0 4px 14px;padding:0 10px 10px}
-  .advice-heading{font-size:21px;margin:-6px -17px 10px;padding:7px 8px;gap:8px}
+  .advice-heading{font-size:20px;margin:-6px -17px 10px;padding:7px 8px;gap:8px}
   .advice-heading .rule{width:20px}
   .advice-body{grid-template-columns:minmax(0,42%) minmax(0,1fr);gap:10px}
-  .quotation{font-size:16px}
+  .quotation{font-size:15px}
   .timestamp{font-size:11px;padding-top:6px}
   .lesson{grid-template-columns:40px minmax(0,1fr);gap:8px;margin:0 4px 14px}
   .lesson .cup{width:40px;height:37px}
-  .interpretation{font-size:16px;padding-left:10px}
-  .return-choice{font-size:17px;padding:11px 14px}
-  .the-end{font-size:22px;margin-bottom:14px}
-  .footer{margin-top:6px;padding-top:2px}
+  .interpretation{font-size:15px;padding-left:10px}
+  .return-choice{font-size:16px;padding:11px 14px}
+  .the-end{font-size:20px;margin-bottom:14px}
+  .footer{margin-top:14px;padding-top:2px}
   .footer button{font-size:12px;min-height:34px}
-  .screen-nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:8px}
-  .screen-nav button{background:transparent;border:0;padding:9px 3px;color:var(--red);font:italic 800 17px var(--serif);cursor:pointer}
-  .screen-nav button:disabled{visibility:hidden}
-  .screen-nav span{font:italic 12px var(--serif);color:var(--ink-soft)}
-  .mobile-hidden{display:none!important}
-  #story,#choices{flex-shrink:0}
 }
 @media (max-width:350px){
   .advice-body{grid-template-columns:1fr}

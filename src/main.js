@@ -77,7 +77,11 @@ function showPage() {
     choicesEl.append(button);
   }
   $('back').disabled = route.length===1;
-  requestAnimationFrame(fitPhonePages);
+}
+// A long page grows taller instead of splitting, so a new page starts from its top.
+function scrollToPageTop() {
+  const top = $('book').getBoundingClientRect().top;
+  if (top < 0) window.scrollTo({ top: window.scrollY + top - 8 });
 }
 function navigate(newRoute) {
   if (turning || !routeIsValid(newRoute)) return;
@@ -85,7 +89,7 @@ function navigate(newRoute) {
   const target = newRoute.at(-1);
   const fromPage = route.at(-1);
   turning = true;
-  if (reducedMotion.matches) { route = newRoute; showPage(); turning=false; return; }
+  if (reducedMotion.matches) { route = newRoute; showPage(); scrollToPageTop(); turning=false; return; }
   sheetEl.replaceChildren();
   labelEl.textContent = `Turning to page ${target}…`;
   labelEl.classList.add('visible');
@@ -97,7 +101,7 @@ function navigate(newRoute) {
     sheetEl.append(sheet);
     requestAnimationFrame(() => sheet.classList.add('flipping'));
   }
-  schedule(() => { route=newRoute; showPage(); }, 280);
+  schedule(() => { route=newRoute; showPage(); scrollToPageTop(); }, 280);
   schedule(() => { clearAnimations(); }, 820);
 }
 function showHistory() {
@@ -116,45 +120,3 @@ $('journey').addEventListener('click', showHistory);
 $('closeHistory').addEventListener('click', () => historyDialog.close());
 historyDialog.addEventListener('click', event => { if (event.target===historyDialog) historyDialog.close(); });
 showPage();
-
-// Fit whole content blocks into readable phone screens, preserving the story route.
-const phoneLayout = window.matchMedia('(max-width: 600px)');
-const screenNav = element('nav', 'screen-nav');
-screenNav.setAttribute('aria-label', 'Read this passage');
-const screenBack = element('button', '', '← Back');
-const screenCount = element('span');
-const screenNext = element('button', '', 'Continue →');
-screenBack.type = screenNext.type = 'button';
-screenNav.append(screenBack, screenCount, screenNext);
-$('book').insertBefore(screenNav, document.querySelector('.footer'));
-let readingScreens = [], readingIndex = 0;
-function renderReadingScreen() {
-  const all = [...storyEl.children, ...choicesEl.children];
-  all.forEach(node => node.classList.toggle('mobile-hidden', phoneLayout.matches && !readingScreens[readingIndex]?.includes(node)));
-  screenBack.disabled = readingIndex === 0;
-  screenNext.disabled = readingIndex === readingScreens.length - 1;
-  screenCount.textContent = `${readingIndex + 1} / ${readingScreens.length}`;
-  screenNav.style.display = phoneLayout.matches && readingScreens.length > 1 ? 'flex' : 'none';
-}
-function fitPhonePages() {
-  const all = [...storyEl.children, ...choicesEl.children];
-  all.forEach(node => node.classList.remove('mobile-hidden'));
-  if (!phoneLayout.matches) { screenNav.style.display = 'none'; return; }
-  screenNav.style.display = 'flex';
-  const book = $('book');
-  const top = storyEl.getBoundingClientRect().top;
-  const available = book.clientHeight - (top - book.getBoundingClientRect().top) - screenNav.offsetHeight - document.querySelector('.footer').offsetHeight - 22;
-  readingScreens = []; let group = [], used = 0;
-  for (const node of all) {
-    const style = getComputedStyle(node);
-    const height = node.getBoundingClientRect().height + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-    if (group.length && used + height > available) { readingScreens.push(group); group = []; used = 0; }
-    group.push(node); used += height;
-  }
-  if (group.length) readingScreens.push(group);
-  readingIndex = 0; renderReadingScreen();
-}
-screenBack.addEventListener('click', () => { if (readingIndex > 0) { readingIndex--; renderReadingScreen(); } });
-screenNext.addEventListener('click', () => { if (readingIndex < readingScreens.length - 1) { readingIndex++; renderReadingScreen(); } });
-window.addEventListener('resize', fitPhonePages);
-document.querySelectorAll('img').forEach(img => img.addEventListener('load', fitPhonePages));
