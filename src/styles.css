@@ -12,8 +12,8 @@
   --page-gap:#b9a274;
   --ink:#33241a;
   --ink-soft:#5b4331;
-  --red:#a3301e;
-  --red-deep:#7e2315;
+  --red:#a3283c;
+  --red-deep:#7c1d2d;
   --cream:#f8e9c8;
   --serif:"Bitter","Rockwell","Roboto Slab",Georgia,serif;
   --paper-photo:url("../public/assets/old-paper.webp");
@@ -67,9 +67,9 @@ h1{opacity:.68}
    height, so the footer is always at the foot of the page. */
 .choices{flex:1 0 auto;padding-top:22px;display:flex;flex-direction:column;justify-content:flex-start}
 .choice-rule{height:5px;border-top:2px solid var(--red);border-bottom:1px solid var(--red);margin-bottom:4px}
-.choice{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,48,30,.45);padding:13px 6px;text-align:center;font:italic 600 19px/1.35 var(--serif);color:var(--red);cursor:pointer;text-shadow:0 0 .6px rgba(163,48,30,.5)}
+.choice{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,40,60,.45);padding:13px 6px;text-align:center;font:italic 600 19px/1.35 var(--serif);color:var(--red);cursor:pointer;text-shadow:0 0 .6px rgba(163,40,60,.5)}
 .choice strong{font-weight:800}
-.choice:hover{background:rgba(163,48,30,.07)}
+.choice:hover{background:rgba(163,40,60,.07)}
 
 /* ---------- Ending pages ---------- */
 .chosen-banner{position:relative;isolation:isolate;margin:4px 6px 22px;padding:9px 14px;text-align:center;font:italic 800 19px/1.25 var(--serif);color:var(--red)}
@@ -100,7 +100,7 @@ h1{opacity:.68}
 .the-end::before,.the-end::after{content:"";display:inline-block;width:26px;height:5px;margin:0 12px;vertical-align:.3em;border-top:1.5px solid var(--red);border-bottom:1.5px solid var(--red)}
 
 /* ---------- Footer controls ---------- */
-.footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:6px;border-top:1px solid rgba(163,48,30,.35)}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:6px;border-top:1px solid rgba(163,40,60,.35)}
 .footer button{background:none;border:0;padding:8px 0;min-height:36px;font:italic 500 14px var(--serif);color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .footer button:disabled{opacity:.35;cursor:default}
 .choice:focus-visible,.return-choice:focus-visible,.footer button:focus-visible,.history-link:focus-visible,.close-history:focus-visible{outline:2px solid var(--red);outline-offset:3px}
@@ -121,7 +121,7 @@ h1{opacity:.68}
 dialog{width:min(390px,calc(100% - 32px));max-height:80vh;padding:24px;border:1.7px solid var(--red);border-radius:6px;background:var(--paper-hi);color:var(--ink);font-family:var(--serif);box-shadow:0 14px 30px rgba(30,18,8,.35)}
 dialog::backdrop{background:rgba(30,18,8,.45)}
 dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26px var(--serif);text-transform:uppercase}
-.history-link{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,48,30,.45);padding:14px 0;text-align:left;font:600 17px var(--serif);color:var(--ink);cursor:pointer}
+.history-link{display:block;width:100%;background:none;border:0;border-bottom:1px dashed rgba(163,40,60,.45);padding:14px 0;text-align:left;font:600 17px var(--serif);color:var(--ink);cursor:pointer}
 .close-history{margin-top:18px;padding:9px 18px;background:none;border:1.5px solid var(--red);border-radius:3px;color:var(--red);font:italic 700 15px var(--serif);cursor:pointer}
 
 /* ---------- Phones: one page per passage, at least a screen tall, growing to fit ---------- */
