@@ -32,6 +32,8 @@ body{container-type:inline-size}
 .site-shell{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:0}
 @container (min-width:601px){
   .site-shell{background:#f9f9f9;border-radius:6px;padding-block:min(20px,calc((100cqw - 600px) / 2))}
+  /* A slight shadow under the paper; it follows the photo's edges and folded corner. */
+  .paper{filter:drop-shadow(0 4px 10px rgba(40,30,15,.14)) drop-shadow(0 1px 2px rgba(40,30,15,.12))}
 }
 
 /* ---------- The page ----------
