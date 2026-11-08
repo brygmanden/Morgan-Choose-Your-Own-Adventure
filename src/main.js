@@ -1,11 +1,10 @@
-import { pages, START_PAGE, routeIsValid, nextRoute, routeTo } from './story.js';
+import { pages, START_PAGE, routeIsValid, nextRoute } from './story.js';
 
 const $ = id => document.getElementById(id);
 const storyEl = $('story');
 const choicesEl = $('choices');
 const sheetEl = $('turnSheets');
 const labelEl = $('turnLabel');
-const historyDialog = $('historyDialog');
 let route = [START_PAGE];
 let turning = false;
 let timers = [];
@@ -104,19 +103,6 @@ function navigate(newRoute) {
   schedule(() => { route=newRoute; showPage(); scrollToPageTop(); }, 280);
   schedule(() => { clearAnimations(); }, 820);
 }
-function showHistory() {
-  const contents = $('historyItems'); contents.replaceChildren();
-  route.forEach((pageNumber, index) => {
-    const button=element('button', 'history-link', `Page ${pageNumber} · ${index===0?'Your first day':index===1?'Your first decision':'Your outcome'}`);
-    button.type='button';
-    button.addEventListener('click', () => { historyDialog.close(); navigate(routeTo(route, pageNumber)); });
-    contents.append(button);
-  });
-  historyDialog.showModal();
-}
 $('back').addEventListener('click', () => { if(route.length>1)navigate(route.slice(0,-1)); });
 $('reset').addEventListener('click', () => navigate([START_PAGE]));
-$('journey').addEventListener('click', showHistory);
-$('closeHistory').addEventListener('click', () => historyDialog.close());
-historyDialog.addEventListener('click', event => { if (event.target===historyDialog) historyDialog.close(); });
 showPage();

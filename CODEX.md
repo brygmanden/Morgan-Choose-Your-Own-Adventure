@@ -8,7 +8,7 @@ Ship a production-quality interactive book for Barista Hustle’s “Getting Sta
 2. Each option is written as an entire italic sentence: “If you decide to … turn to page 12.”
 3. Selecting an option triggers a **rapid riffle of several paper sheets**, updating the page and its number.
 4. Page numbers deliberately jump (1 → 12 → 52, etc.), reproducing the old adventure-book convention.
-5. `Your journey` displays the route so far and allows returning to earlier pages. `Previous page` and `Start again` also work.
+5. `Previous page` steps back along the route and `Start again` returns to page 1. (The `Your journey` route dialog has been removed.)
 6. Every branch is defensible: nine distinct consequences, none graded right/wrong.
 7. Ending pages contain an authentic Morgan quotation, a black-and-white graphic-novel portrait, timestamp, and editorial interpretation.
 

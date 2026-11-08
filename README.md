@@ -27,7 +27,7 @@ Push this project to a repository. In GitHub **Settings → Pages**, choose **De
 ## Structure
 
 - `index.html`: accessible page shell and navigation.
-- `src/main.js`: book UI, navigation, bookmark dialog, fast page-turning transition.
+- `src/main.js`: book UI, navigation (Previous page, Start again), fast page-turning transition.
 - `src/story.js`: route validation and navigation helpers.
 - `src/story-data.json`: editable passages, branching page numbers, ending quotes and interpretations.
 - `src/styles.css`: old gamebook paperback look (the photographed page as paper, worn, faded print), mobile styles, reduced-motion support.
@@ -46,4 +46,4 @@ The **fictional situations and business outcomes are invented teaching examples*
 
 ## Accessibility
 
-Semantic buttons, keyboard navigation, focus styles, visible full-page numbers, a journey modal, and `prefers-reduced-motion` support are included. Before production, test screen reader announcements, long quotes on narrow phones, and contrast.
+Semantic buttons, keyboard navigation, focus styles, visible full-page numbers, and `prefers-reduced-motion` support are included. Before production, test screen reader announcements, long quotes on narrow phones, and contrast.
