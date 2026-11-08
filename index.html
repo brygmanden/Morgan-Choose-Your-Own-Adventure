@@ -25,6 +25,18 @@
         <feColorMatrix in="s" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  6 0 0 0 -1.1" result="sm" />
         <feComposite in="d" in2="sm" operator="in" />
       </filter>
+      <!-- Worn red fills: small ink drop-outs, rubbed-off patches and faint horizontal scuffs. -->
+      <filter id="worn-fill" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency=".5" numOctaves="3" seed="21" result="n" />
+        <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -9 0 0 0 7.3" result="holes" />
+        <feTurbulence type="fractalNoise" baseFrequency=".02 .06" numOctaves="3" seed="5" result="p" />
+        <feColorMatrix in="p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.5 0 0 0 .2" result="patch" />
+        <feTurbulence type="fractalNoise" baseFrequency=".004 .4" numOctaves="2" seed="14" result="sc" />
+        <feColorMatrix in="sc" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -9 0 0 0 7.2" result="scuffs" />
+        <feComposite in="holes" in2="patch" operator="arithmetic" k1="1" result="m1" />
+        <feComposite in="m1" in2="scuffs" operator="arithmetic" k1="1" result="mask" />
+        <feComposite in="SourceGraphic" in2="mask" operator="in" />
+      </filter>
       <!-- Worn print: rough letter edges, small ink drop-outs and patchy faded areas. -->
       <filter id="worn-text" x="-2%" y="-4%" width="104%" height="108%">
         <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="9" result="fine" />

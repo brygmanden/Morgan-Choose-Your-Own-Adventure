@@ -88,7 +88,7 @@ h1{opacity:.68}
 
 .advice{position:relative;margin:0 6px 18px;padding:0 14px 14px;border:1.7px solid var(--red);border-radius:5px;background:rgba(251,239,212,.3)}
 .advice-heading{position:relative;isolation:isolate;margin:-7px -22px 14px;padding:8px 12px;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--cream);font:italic 900 clamp(22px,6vw,30px)/1.05 var(--serif);text-transform:uppercase}
-.advice-heading::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);filter:url(#rough)}
+.advice-heading::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);filter:url(#rough) url(#worn-fill)}
 .advice-heading .rule{flex:none;width:34px;height:6px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor}
 .advice-body{display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);gap:14px;align-items:start}
 /* Morgan's halftone avatar, shown as on the original site: untinted, cropped so the
@@ -103,7 +103,7 @@ h1{opacity:.68}
 .interpretation{margin:0;padding:2px 0 2px 14px;border-left:2px solid var(--red);font-size:19px;line-height:1.28;font-weight:650;text-shadow:0 0 .6px rgba(43,29,19,.55)}
 
 .return-choice{position:relative;isolation:isolate;display:block;width:100%;border:0;background:none;padding:13px 20px;color:var(--cream);font:italic 800 20px/1.25 var(--serif);cursor:pointer}
-.return-choice::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);filter:url(#brush)}
+.return-choice::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--red);filter:url(#brush) url(#worn-fill)}
 .return-choice:hover::before{background:var(--red-deep)}
 
 /* The classic gamebook sign-off on every ending. */
