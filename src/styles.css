@@ -4,7 +4,7 @@
 @font-face{font-family:"Bitter";src:url("../public/fonts/bitter-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
 
 :root{
-  --desk:#c2bbaf;
+  --desk:#d6c19a;  /* paper-toned, shows only behind the photo's folded corner */
   --paper:#e9cd9a;
   --paper-hi:#f2dfb3;
   --paper-low:#d2a466;
@@ -25,20 +25,22 @@ html{background:var(--desk)}
 body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .svg-defs{position:absolute;width:0;height:0;overflow:hidden}
 
-.site-shell{padding-block:28px 30px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.site-shell{padding:0}
 
 /* ---------- The page ----------
    .paper is a photograph of a real old book page (transparent background).
    It is drawn as a nine-slice border image: the corners, including the folded
    top-right corner, keep their natural shape, and only the plain paper in the
    middle and along the edges stretches to fit the page. */
-.book{position:relative;isolation:isolate;width:100%;max-width:540px;min-height:800px;margin:0 auto 10px;padding:34px 36px 26px 38px;display:flex;flex-direction:column;perspective:1400px}
+/* The page fills the window and grows with its content; the text stays in a centred,
+   readable column. --gutter is the side margin of that column. */
+.book{--gutter:max(38px,calc(50vw - 300px));position:relative;isolation:isolate;width:100%;min-height:100vh;min-height:100svh;margin:0;padding:34px max(var(--gutter),env(safe-area-inset-right,0px)) 26px max(var(--gutter),env(safe-area-inset-left,0px));display:flex;flex-direction:column;perspective:1400px}
 .paper{position:absolute;inset:0;z-index:-1;border-style:solid;border-color:transparent;
   border-image-source:var(--paper-photo);border-image-slice:230 230 120 120 fill;border-image-width:184px 184px 96px 96px;border-image-repeat:stretch;
-  filter:drop-shadow(0 12px 22px rgba(38,24,8,.3)) drop-shadow(0 2px 3px rgba(38,24,8,.22))}
+}
 
 /* ---------- Running head ---------- */
-.book-header{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;gap:8px;margin-bottom:10px;margin-right:30px}
+.book-header{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;align-items:center;gap:8px;margin-bottom:10px;margin-right:max(0px,calc(70px - var(--gutter)))}
 .cup{display:block;width:50px;height:46px;color:var(--ink)}
 .brand{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;text-align:center}
 .brand-name{font-weight:800;font-size:clamp(20px,5.4vw,28px);line-height:1;letter-spacing:.02em;text-transform:uppercase;filter:url(#worn-ink)}
@@ -47,7 +49,7 @@ body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--serif);-
 .page-label{justify-self:end;align-self:start;margin-top:8px;font-style:italic;font-weight:700;font-size:13px;letter-spacing:.06em;white-space:nowrap}
 
 h1{margin:6px 0 4px;color:var(--red);font-weight:900;font-size:clamp(30px,8.2vw,46px);line-height:1;letter-spacing:-.005em;text-align:center;text-transform:uppercase;text-wrap:balance;filter:url(#worn-title)}
-.ornament{display:flex;align-items:center;gap:6px;color:var(--red);margin-bottom:18px}
+.ornament{display:flex;align-items:center;gap:6px;color:var(--red);margin-bottom:18px;margin-right:max(0px,calc(56px - var(--gutter)))}
 .ornament::before,.ornament::after{content:"";flex:1;height:5px;border-top:2px solid currentColor;border-bottom:1px solid currentColor}
 .ornament svg{flex:none;width:64px;height:22px}
 
@@ -126,9 +128,7 @@ dialog h2{margin:0 0 14px;text-align:center;color:var(--red);font:italic 900 26p
 
 /* ---------- Phones: one page per passage, at least a screen tall, growing to fit ---------- */
 @media (max-width:600px){
-  .site-shell{padding-block:6px}
-  .site-shell{padding-right:max(24px,env(safe-area-inset-right,0px))}
-  .book{min-height:calc(100svh - 12px);margin-bottom:0;padding:20px 18px 12px 20px}
+  .book{padding:20px max(18px,env(safe-area-inset-right,0px)) 12px max(20px,env(safe-area-inset-left,0px))}
   .book-header{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;margin-bottom:6px;margin-right:34px}
   .cup{width:42px;height:39px}
   .brand-name{font-size:20px}
