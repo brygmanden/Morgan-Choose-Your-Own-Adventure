@@ -24,9 +24,31 @@ npm test
 
 Push this project to a repository. In GitHub **Settings → Pages**, choose **Deploy from a branch**, branch `main`, folder `/(root)`. This site uses relative links and requires no build step. Once Pages is deployed, share its `https://<account>.github.io/<repo>/` URL.
 
+## Embed in an iframe
+
+Load the app with `?embed=1`, for example `https://<account>.github.io/<repo>/?embed=1`. In embed mode the page drops its full-window minimum height, and `src/embed-resize.js` posts its content height to the parent page whenever it changes:
+
+```js
+{ type: "RESIZE_IFRAME", height: 1146 }
+```
+
+The parent page listens for that message and sets the iframe's height:
+
+```html
+<iframe id="cafe-manager" src="https://<account>.github.io/<repo>/?embed=1" style="width:100%;border:0" scrolling="no"></iframe>
+<script>
+  window.addEventListener("message", (event) => {
+    if (event.data && event.data.type === "RESIZE_IFRAME") {
+      document.getElementById("cafe-manager").style.height = event.data.height + "px";
+    }
+  });
+</script>
+```
+
 ## Structure
 
 - `index.html`: accessible page shell and navigation.
+- `src/embed-resize.js`: posts the page height to an embedding parent page (see *Embed in an iframe*).
 - `src/main.js`: book UI, navigation (Previous page, Start again), fast page-turning transition.
 - `src/story.js`: route validation and navigation helpers.
 - `src/story-data.json`: editable passages, branching page numbers, ending quotes and interpretations.

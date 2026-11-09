@@ -30,6 +30,9 @@ body{margin:0;background:transparent;color:var(--ink);font-family:var(--serif);-
    gets top and bottom padding of half the extra width, capped at 20px. */
 body{container-type:inline-size}
 .site-shell{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:0}
+/* Embedded (?embed=1): the iframe is sized to the content, so the page must not
+   also stretch to the iframe's height, or it could never shrink back. */
+.is-embed .site-shell{min-height:0}
 @container (min-width:601px){
   .site-shell{background:#f4f4f4;border-radius:6px;padding-block:min(20px,calc((100cqw - 600px) / 2))}
   /* A slight shadow under the paper; it follows the photo's edges and folded corner. */
@@ -117,7 +120,9 @@ h1{opacity:.68}
 .choice:focus-visible,.return-choice:focus-visible,.footer button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 /* ---------- Page riffle ---------- */
-.turn-sheets{position:absolute;inset:0;z-index:10;pointer-events:none;perspective:1400px}
+/* Clipped to the page, so the flipping sheets never make the page taller (which
+   would also send an inflated height to an embedding iframe). */
+.turn-sheets{position:absolute;inset:0;z-index:10;pointer-events:none;perspective:1400px;overflow:hidden}
 .sheet{position:absolute;inset:0;border-radius:2px 4px 5px 2px;background:var(--paper-photo) center/100% 100% no-repeat;filter:drop-shadow(3px 0 6px rgba(40,24,10,.22));transform-origin:left center;opacity:0;backface-visibility:hidden}
 .sheet.backwards{transform-origin:right center}
 .sheet.flipping{animation:fastFlip .39s ease-in var(--delay) both}
