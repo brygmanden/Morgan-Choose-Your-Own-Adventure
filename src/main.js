@@ -114,43 +114,50 @@ $('back').addEventListener('click', () => { if(route.length>1)navigate(route.sli
 $('reset').addEventListener('click', () => navigate([START_PAGE]));
 showPage();
 
-// Backup height reports for an embedding page, alongside src/embed-resize.js.
-// That script reports the content height via ResizeObserver, whose notifications
-// browsers can delay (e.g. while the iframe is off-screen), and it cannot tell when
-// the frame shows less than the height it asked for (e.g. a theme adds a border or
-// padding to iframes). These reports use the same RESIZE_IFRAME message and compare
-// the content with what the frame actually shows: if the page overflows the frame
-// (scroll height larger than the visible height), they ask for the frame to grow by
-// exactly the missing amount; if there is empty space below the page, to shrink by
-// it. They run after every page turn, when the window changes size, once fonts are
-// ready, and in a light check once a second that only sends when something is off.
-let reportedHeight = 0;
-function contentHeight() {
+// Height reports for an embedding page, alongside src/embed-resize.js (which only
+// reports when the browser's ResizeObserver fires, and browsers can delay that,
+// e.g. while the iframe is off-screen). After every render the app knows its exact
+// height (the book page plus the desktop padding) and sends it with the same
+// RESIZE_IFRAME message. If the page is ever taller than what the iframe shows
+// (scroll height larger than the visible height), the full height is sent again,
+// once a second, until the iframe fits.
+let sentHeight = 0;
+let sentCount = 0;
+function pageHeight() {
   const root = document.documentElement;
   const body = document.body;
-  const height = Math.max(body.scrollHeight, body.offsetHeight, body.getBoundingClientRect().height);
-  // The root's scroll height only counts when it exceeds the frame: that is overflow.
-  return Math.ceil(root.scrollHeight > window.innerHeight ? Math.max(height, root.scrollHeight) : height);
+  return Math.ceil(Math.max(body.scrollHeight, body.offsetHeight, body.getBoundingClientRect().height,
+    root.scrollHeight > window.innerHeight ? root.scrollHeight : 0));
 }
 function reportHeight(force = false) {
   if (!framed || !document.body) return;
-  const needed = contentHeight();
-  const shown = window.innerHeight;
-  const mismatch = needed - shown; // > 0: page cut off; < 0: empty space below it
-  if (!force && Math.abs(mismatch) < 2) return;
-  // The frame's current height is the last height asked for, or what it shows if
-  // nothing was asked yet. Adjust it by the mismatch, which also covers any border
-  // or padding around the frame; never ask for less than the content itself, and
-  // cap the extra so an embedding page that ignores the message cannot run it up.
-  const current = reportedHeight || shown;
-  const height = Math.min(Math.max(current + mismatch, needed), needed + 200);
-  if (!force && Math.abs(height - reportedHeight) < 2) return;
-  reportedHeight = height;
+  const height = pageHeight();
+  const overflowing = height > window.innerHeight + 1;
+  if (!force && !overflowing && Math.abs(height - sentHeight) < 2) { showDebug(); return; }
+  sentHeight = height;
+  sentCount++;
   window.parent.postMessage({ type: 'RESIZE_IFRAME', height }, '*');
+  showDebug();
 }
 if (framed) {
   window.addEventListener('resize', () => requestAnimationFrame(() => reportHeight()));
-  window.addEventListener('load', () => reportHeight());
+  window.addEventListener('load', () => reportHeight(true));
   document.fonts?.ready.then(() => reportHeight());
   setInterval(() => reportHeight(), 1000);
 }
+
+// Diagnostics: add ?debug=1 to the app's address to show the page height, the
+// iframe's visible height and the last height sent, at the top of the app.
+const debugPanel = new URLSearchParams(location.search).get('debug') === '1' ? document.createElement('div') : null;
+if (debugPanel) {
+  debugPanel.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99;padding:6px 10px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;background:#000c;color:#fff;white-space:pre-wrap';
+  document.body.append(debugPanel);
+}
+function showDebug() {
+  if (!debugPanel) return;
+  const height = pageHeight();
+  const shown = window.innerHeight;
+  const state = height > shown + 1 ? `CUT OFF by ${height - shown}px` : height < shown - 1 ? `${shown - height}px empty below` : 'fits';
+  debugPanel.textContent = `page height ${height}px · iframe shows ${shown}px · ${state}\nlast height sent ${sentHeight}px · messages sent ${sentCount} · framed ${framed} · width ${window.innerWidth}px`;
+}
+if (debugPanel) { showDebug(); setInterval(showDebug, 250); }

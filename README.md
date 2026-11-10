@@ -32,7 +32,9 @@ The app detects when it is loaded inside an iframe (in `src/main.js`; adding `?e
 { type: "RESIZE_IFRAME", height: 1146 }
 ```
 
-`src/main.js` also sends backup height reports with the same message. These compare the page with what the iframe actually shows: if the page overflows the frame (its scroll height is larger than the visible height), they ask for the iframe to grow by exactly the missing amount, and if there is empty space below the page, to shrink by it. This also corrects for anything that takes part of the iframe's height, such as a theme adding a border or padding to iframes. They run after every page turn, when the window changes size, once fonts are ready, and in a once-a-second check that only sends when something is off.
+`src/main.js` also sends the page's exact height (the book page plus the desktop padding) with the same message after every render: after every page turn, when the window changes size and once fonts are ready. If the page is ever taller than what the iframe shows, it sends the full height again once a second until the iframe fits.
+
+To diagnose a sizing problem on the embedding page, add `debug=1` to the iframe address (for example `?embed=1&debug=1`). A panel at the top of the app then shows the page height, the iframe's visible height and the last height sent.
 
 The parent page listens for that message and sets the iframe's height:
 
