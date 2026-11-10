@@ -31,6 +31,11 @@ body{container-type:inline-size}
 /* Embedded (?embed=1): the iframe is sized to the content, so the page must not
    also stretch to the iframe's height, or it could never shrink back. */
 .is-embed .site-shell{min-height:0}
+/* Desktop: when the container is wider than the 600px page, add top and bottom
+   padding of half the extra width, capped at 20px. */
+@container (min-width:601px){
+  .site-shell{padding-block:min(20px,calc((100cqw - 600px) / 2))}
+}
 
 /* ---------- The page ----------
    .paper is a photograph of a real old book page (transparent background).
