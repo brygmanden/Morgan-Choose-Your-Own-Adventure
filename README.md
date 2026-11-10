@@ -32,7 +32,7 @@ The app detects when it is loaded inside an iframe (in `src/main.js`; adding `?e
 { type: "RESIZE_IFRAME", height: 1146 }
 ```
 
-`src/main.js` also sends backup height reports with the same message after every page turn, when the window changes size, once fonts are ready, and in a once-a-second check that only sends when the height has changed. Browsers can delay the resize notifications that `src/embed-resize.js` relies on, for example while the iframe is scrolled off-screen; the backups make sure the iframe always catches up.
+`src/main.js` also sends backup height reports with the same message. These compare the page with what the iframe actually shows: if the page overflows the frame (its scroll height is larger than the visible height), they ask for the iframe to grow by exactly the missing amount, and if there is empty space below the page, to shrink by it. This also corrects for anything that takes part of the iframe's height, such as a theme adding a border or padding to iframes. They run after every page turn, when the window changes size, once fonts are ready, and in a once-a-second check that only sends when something is off.
 
 The parent page listens for that message and sets the iframe's height:
 

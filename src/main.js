@@ -115,15 +115,35 @@ $('reset').addEventListener('click', () => navigate([START_PAGE]));
 showPage();
 
 // Backup height reports for an embedding page, alongside src/embed-resize.js.
-// That script relies on ResizeObserver, whose notifications browsers can delay,
-// for example while an embedded iframe is scrolled off-screen. These reports use
-// the same RESIZE_IFRAME message so the iframe always catches up: after every page
-// turn, when the window changes size, once fonts are ready, and in a light check
-// once a second that only sends when the height has changed.
+// That script reports the content height via ResizeObserver, whose notifications
+// browsers can delay (e.g. while the iframe is off-screen), and it cannot tell when
+// the frame shows less than the height it asked for (e.g. a theme adds a border or
+// padding to iframes). These reports use the same RESIZE_IFRAME message and compare
+// the content with what the frame actually shows: if the page overflows the frame
+// (scroll height larger than the visible height), they ask for the frame to grow by
+// exactly the missing amount; if there is empty space below the page, to shrink by
+// it. They run after every page turn, when the window changes size, once fonts are
+// ready, and in a light check once a second that only sends when something is off.
 let reportedHeight = 0;
+function contentHeight() {
+  const root = document.documentElement;
+  const body = document.body;
+  const height = Math.max(body.scrollHeight, body.offsetHeight, body.getBoundingClientRect().height);
+  // The root's scroll height only counts when it exceeds the frame: that is overflow.
+  return Math.ceil(root.scrollHeight > window.innerHeight ? Math.max(height, root.scrollHeight) : height);
+}
 function reportHeight(force = false) {
   if (!framed || !document.body) return;
-  const height = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+  const needed = contentHeight();
+  const shown = window.innerHeight;
+  const mismatch = needed - shown; // > 0: page cut off; < 0: empty space below it
+  if (!force && Math.abs(mismatch) < 2) return;
+  // The frame's current height is the last height asked for, or what it shows if
+  // nothing was asked yet. Adjust it by the mismatch, which also covers any border
+  // or padding around the frame; never ask for less than the content itself, and
+  // cap the extra so an embedding page that ignores the message cannot run it up.
+  const current = reportedHeight || shown;
+  const height = Math.min(Math.max(current + mismatch, needed), needed + 200);
   if (!force && Math.abs(height - reportedHeight) < 2) return;
   reportedHeight = height;
   window.parent.postMessage({ type: 'RESIZE_IFRAME', height }, '*');
