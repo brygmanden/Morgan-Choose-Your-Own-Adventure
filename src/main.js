@@ -20,6 +20,7 @@ function clearAnimations() {
   timers.forEach(clearTimeout); timers = [];
   sheetEl.replaceChildren(); labelEl.textContent = '';
   turning = false;
+  reportHeight(true);
 }
 function schedule(fn, delay) { timers.push(window.setTimeout(fn, delay)); }
 function element(tag, className, text) {
@@ -94,7 +95,7 @@ function navigate(newRoute) {
   const target = newRoute.at(-1);
   const fromPage = route.at(-1);
   turning = true;
-  if (reducedMotion.matches) { route = newRoute; showPage(); scrollToPageTop(); turning=false; return; }
+  if (reducedMotion.matches) { route = newRoute; showPage(); scrollToPageTop(); turning=false; requestAnimationFrame(() => reportHeight(true)); return; }
   sheetEl.replaceChildren();
   labelEl.textContent = `Turning to page ${target}…`;
   labelEl.classList.add('visible');
@@ -112,3 +113,24 @@ function navigate(newRoute) {
 $('back').addEventListener('click', () => { if(route.length>1)navigate(route.slice(0,-1)); });
 $('reset').addEventListener('click', () => navigate([START_PAGE]));
 showPage();
+
+// Backup height reports for an embedding page, alongside src/embed-resize.js.
+// That script relies on ResizeObserver, whose notifications browsers can delay,
+// for example while an embedded iframe is scrolled off-screen. These reports use
+// the same RESIZE_IFRAME message so the iframe always catches up: after every page
+// turn, when the window changes size, once fonts are ready, and in a light check
+// once a second that only sends when the height has changed.
+let reportedHeight = 0;
+function reportHeight(force = false) {
+  if (!framed || !document.body) return;
+  const height = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+  if (!force && Math.abs(height - reportedHeight) < 2) return;
+  reportedHeight = height;
+  window.parent.postMessage({ type: 'RESIZE_IFRAME', height }, '*');
+}
+if (framed) {
+  window.addEventListener('resize', () => requestAnimationFrame(() => reportHeight()));
+  window.addEventListener('load', () => reportHeight());
+  document.fonts?.ready.then(() => reportHeight());
+  setInterval(() => reportHeight(), 1000);
+}
