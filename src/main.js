@@ -1,6 +1,12 @@
 import { pages, START_PAGE, routeIsValid, nextRoute } from './story.js';
 
 const $ = id => document.getElementById(id);
+
+// Inside an iframe the page must be as tall as its content, not stretch to the
+// iframe's own height, or an embedding page could never shrink the iframe back.
+// (Separate from src/embed-resize.js, which only marks ?embed=1 pages.)
+const framed = (() => { try { return window.self !== window.top; } catch { return true; } })();
+if (framed) document.body.classList.add('is-framed');
 const storyEl = $('story');
 const choicesEl = $('choices');
 const sheetEl = $('turnSheets');

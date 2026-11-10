@@ -1,5 +1,3 @@
-// Iframe height sync: tells the parent page how tall this page is, so the
-// iframe can be sized to fit. Open the app with ?embed=1 when embedding it.
 (function () {
   let lastHeight = 0;
   const THRESHOLD = 2; // Ignore size variations smaller than 2px
@@ -29,21 +27,9 @@
     }
   }
 
-  // Set is-embed class on body if embed parameter is present in the URL,
-  // or automatically when the page is loaded inside an iframe (e.g. WordPress
-  // embed code without ?embed=1). Without it, the page keeps its full-window
-  // minimum height, which inside an iframe is the iframe's own height, so the
-  // reported height could never shrink.
-  function isInIframe() {
-    try {
-      return window.self !== window.top;
-    } catch (e) {
-      return true; // cross-origin parent: we are framed
-    }
-  }
-
+  // Set is-embed class on body if embed parameter is present in the URL
   function checkEmbed() {
-    if (new URLSearchParams(window.location.search).get("embed") === "1" || isInIframe()) {
+    if (new URLSearchParams(window.location.search).get("embed") === "1") {
       document.body.classList.add("is-embed");
     }
   }

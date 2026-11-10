@@ -28,9 +28,9 @@ body{margin:0;background:transparent;color:var(--ink);font-family:var(--serif);-
 /* body is the size container. Around the page the background is transparent. */
 body{container-type:inline-size}
 .site-shell{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:0}
-/* Embedded (?embed=1): the iframe is sized to the content, so the page must not
-   also stretch to the iframe's height, or it could never shrink back. */
-.is-embed .site-shell{min-height:0}
+/* Embedded (?embed=1, or any iframe): the iframe is sized to the content, so the page
+   must not also stretch to the iframe's height, or it could never shrink back. */
+.is-embed .site-shell,.is-framed .site-shell{min-height:0}
 /* Desktop: when the container is wider than the 600px page, the surround is dark
    (#2d2a25) and gets top and bottom padding of half the extra width, capped at 20px. */
 @container (min-width:601px){
