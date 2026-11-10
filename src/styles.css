@@ -25,8 +25,7 @@ html{background:transparent}
 body{margin:0;background:transparent;color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .svg-defs{position:absolute;width:0;height:0;overflow:hidden}
 
-/* body is the size container (cqw units below are its width). The page fills it
-   edge to edge on a transparent background. */
+/* body is the size container. Around the page the background is transparent. */
 body{container-type:inline-size}
 .site-shell{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:0}
 /* Embedded (?embed=1): the iframe is sized to the content, so the page must not
@@ -38,10 +37,9 @@ body{container-type:inline-size}
    It is drawn as a nine-slice border image: the corners, including the folded
    top-right corner, keep their natural shape, and only the plain paper in the
    middle and along the edges stretches to fit the page. */
-/* The page spans the full width and is at least as tall as the window, growing with
-   its content. The text stays in a centred column of at most 600px; --gutter is
-   the side margin that keeps it there. */
-.book{--gutter:max(38px,calc(50cqw - 300px));position:relative;isolation:isolate;width:100%;flex:1 0 auto;margin:0;padding:34px max(var(--gutter),env(safe-area-inset-right,0px)) 26px max(var(--gutter),env(safe-area-inset-left,0px));display:flex;flex-direction:column;perspective:1400px}
+/* The page is at most 600px wide and centred, at least as tall as the window and
+   growing with its content. --gutter is the side margin of the text column. */
+.book{--gutter:38px;position:relative;isolation:isolate;width:100%;max-width:600px;flex:1 0 auto;margin:0 auto;padding:34px max(var(--gutter),env(safe-area-inset-right,0px)) 26px max(var(--gutter),env(safe-area-inset-left,0px));display:flex;flex-direction:column;perspective:1400px}
 .paper{position:absolute;inset:0;z-index:-1;border-style:solid;border-color:transparent;
   border-image-source:var(--paper-photo);border-image-slice:230 230 120 120 fill;border-image-width:184px 184px 96px 96px;border-image-repeat:stretch;
 }
