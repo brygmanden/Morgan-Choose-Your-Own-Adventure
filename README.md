@@ -26,7 +26,7 @@ Push this project to a repository. In GitHub **Settings → Pages**, choose **De
 
 ## Embed in an iframe
 
-Load the app with `?embed=1`, for example `https://<account>.github.io/<repo>/?embed=1`. In embed mode the page drops its full-window minimum height, and `src/embed-resize.js` posts its content height to the parent page whenever it changes:
+The app detects when it is loaded inside an iframe (adding `?embed=1` to the address also works). In embed mode the page drops its full-window minimum height, and `src/embed-resize.js` posts its content height to the parent page whenever it changes:
 
 ```js
 { type: "RESIZE_IFRAME", height: 1146 }

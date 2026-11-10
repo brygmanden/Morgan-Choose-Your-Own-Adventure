@@ -29,9 +29,21 @@
     }
   }
 
-  // Set is-embed class on body if embed parameter is present in the URL
+  // Set is-embed class on body if embed parameter is present in the URL,
+  // or automatically when the page is loaded inside an iframe (e.g. WordPress
+  // embed code without ?embed=1). Without it, the page keeps its full-window
+  // minimum height, which inside an iframe is the iframe's own height, so the
+  // reported height could never shrink.
+  function isInIframe() {
+    try {
+      return window.self !== window.top;
+    } catch (e) {
+      return true; // cross-origin parent: we are framed
+    }
+  }
+
   function checkEmbed() {
-    if (new URLSearchParams(window.location.search).get("embed") === "1") {
+    if (new URLSearchParams(window.location.search).get("embed") === "1" || isInIframe()) {
       document.body.classList.add("is-embed");
     }
   }
